@@ -1,0 +1,17 @@
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('source code'){
+            steps{
+                git branch: 'main', url: 'https://github.com/Azure-Samples/js-e2e-express-server.git'
+            }
+        }
+        stage('Build code'){
+            steps{
+                sh "npm install"
+            }
+        }
+    }
+}

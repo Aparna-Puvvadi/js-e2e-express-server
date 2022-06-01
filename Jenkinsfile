@@ -23,5 +23,10 @@ pipeline
                 sh 'npm pack'
             }
         }
+        stage('start the service'){
+            steps{
+                sh 'npm start &'
+            }
+        }
     }
 }

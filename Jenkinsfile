@@ -1,6 +1,6 @@
 pipeline
 {
-    agent any
+    agent { label 'JDK8'}
     stages
     {
         stage('source code'){
@@ -20,7 +20,7 @@ pipeline
         }
         stage("sonar analysis") {
             steps {
-                withSonarQubeEnv(installationName: 'SONAR_9.4', envOnly: true, credentialsId: 'SONAR_TOKEN') {
+                withSonarQubeEnv(installationName: 'SONAR_LATEST', envOnly: true, credentialsId: 'sonar') {
                     sh "npm run sonar"
                     echo "${env.SONAR_HOST_URL}"
                 }    

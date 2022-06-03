@@ -20,7 +20,7 @@ pipeline
         }
         stage("sonar analysis") {
             steps {
-                withSonarQubeEnv(installationName: 'SONAR_LATEST', envOnly: true, credentialsId: 'sonar') {
+                withSonarQubeEnv(installationName: 'SONAR_LATEST', envOnly: true, credentialsId: 'Sonar') {
                     sh "npm run sonar"
                     echo "${env.SONAR_HOST_URL}"
                 }    

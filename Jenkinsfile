@@ -13,6 +13,19 @@ pipeline
                 sh 'npm install'
             }
         }
+        stage('test'){  
+            steps{
+                sh "npm test"    
+           }              
+        }
+        stage("sonar analysis") {
+            steps {
+                withSonarQubeEnv(installationName: 'SONAR_9.4', envOnly: true, credentialsId: 'SONAR_TOKEN') {
+                    sh "npm run sonar"
+                    echo "${env.SONAR_HOST_URL}"
+                }    
+            }
+        }
         stage('Build the code'){
             steps{
                    sh 'npm run build'
@@ -21,11 +34,6 @@ pipeline
         stage('archiving the reports'){
             steps{
                 sh 'npm pack'
-            }
-        }
-        stage('start the service'){
-            steps{
-                sh 'npm start &'
             }
         }
     }
